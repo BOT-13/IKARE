@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="attri.js">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 50%;
+            font-size: 16px;
+        }
+
+        .tabs button.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        form {
+            display: none;
+        }
+
+        form.active {
+            display: block;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Tabs to switch between login and registration -->
+        <div class="tabs">
+            <button class="active" id="login-tab">Login</button>
+            <button id="register-tab">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="active">
+            <h2>Login</h2>
+            <label for="login-email">Email:</label>
+            <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
+            
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Registration Form -->
+        <form id="register-form">
+            <h2>Register</h2>
+            <label for="register-name">Full Name:</label>
+            <input type="text" id="register-name" name="name" placeholder="Enter your full name" required>
+
+            <label for="register-gender">Gender:</label>
+            <select id="register-gender" name="gender" required>
+                <option value="" disabled selected>Select your gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="register-dob">Date of Birth:</label>
+            <input type="date" id="register-dob" name="dob" required>
+
+            <label for="register-age">Age:</label>
+            <input type="number" id="register-age" name="age" placeholder="Enter your age" min="1" required>
+
+            <label for="register-phone">Phone Number:</label>
+            <input type="tel" id="register-phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+
+            <label for="register-address">Address:</label>
+            <input type="text" id="register-address" name="address" placeholder="Enter your address" required>
+
+            <label for="register-email">Email:</label>
+            <input type="email" id="register-email" name="email" placeholder="Enter your email" required>
+
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" name="password" placeholder="Enter your password" required>
+
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Message -->
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // JavaScript for switching between Login and Registration forms
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const messageDiv = document.getElementById('message');
+
+        // Switch to login form
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+        });
+
+        // Switch to register form
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+
+        // Simulate login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            // Basic validation (backend logic should handle actual authentication)
+            if (email && password) {
+                messageDiv.textContent = 'Login successful!';
+                messageDiv.style.color = 'green';
+            } else {
+                messageDiv.textContent = 'Invalid login credentials.';
+                messageDiv.style.color = 'red';
+            }
+        });
+
+        // Simulate registration form submission
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const gender = document.getElementById('register-gender').value;
+            const dob = document.getElementById('register-dob').value;
+            const age = document.getElementById('register-age').value;
+            const phone = document.getElementById('register-phone').value;
+            const address = document.getElementById('register-address').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Perform basic checks (e.g., password matching) - backend should handle more complex validation
+            if (password === confirmPassword) {
+                messageDiv.textContent = 'Registration successful!';
+                messageDiv.style.color = 'green';
+            } else {
+                messageDiv.textContent = 'Passwords do not match!';
+                messageDiv.style.color = 'red';
+            }
+        });
+    </script>
+
+        <h1>Registration Form</h1>
+        <form id="registrationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br><br>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age"><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"><br><br>
+            
+            <button type="button" onclick="register()">Register</button>
+        </form>
+    
+        <h1>Profile</h1>
+        <form id="profileForm">
+            <label for="profileName">Name:</label>
+            <input type="text" id="profileName" name="profileName" readonly><br><br>
+            
+            <label for="profileAge">Age:</label>
+            <input type="number" id="profileAge" name="profileAge" readonly><br><br>
+            
+            <label for="profileEmail">Email:</label>
+            <input type="email" id="profileEmail" name="profileEmail" readonly><br><br>
+        </form>
+    
+        <script src="app.js"></script>
+    
+
+</body>
+</html>
